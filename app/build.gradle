@@ -20,7 +20,7 @@ android {
 
     productFlavors {
         devel {
-            buildConfigField 'String', 'HOST', '"http://192.168.56.1/UserApi/v1/"'
+            buildConfigField 'String', 'HOST', '"http://192.168.56.1:8888/UserApi/v1/"'
         }
     }
 

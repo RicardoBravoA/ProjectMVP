@@ -3,10 +3,10 @@ package com.rba.mvpproject.model.response;
 import java.util.List;
 
 /**
- * Created by Ricardo Bravo on 17/07/16.
+ * Created by Ricardo Bravo on 23/07/16.
  */
 
-public class UserResponse {
+public class LoginResponse {
 
     /**
      * status : success

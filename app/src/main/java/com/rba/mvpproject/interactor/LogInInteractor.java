@@ -1,8 +1,10 @@
 package com.rba.mvpproject.interactor;
 
+import android.util.Log;
+
 import com.rba.mvpproject.interactor.api.UserApiManager;
 import com.rba.mvpproject.interactor.callback.LoginCallback;
-import com.rba.mvpproject.model.response.UserResponse;
+import com.rba.mvpproject.model.response.LoginResponse;
 
 import java.util.Map;
 
@@ -18,19 +20,22 @@ public class LogInInteractor {
 
     public static void login(Map<String, String> data, final LoginCallback callback) {
 
-        UserApiManager.apiManager().login(data, new Callback<UserResponse>() {
+        Log.i("x- data", data.toString());
+
+        Call<LoginResponse> call = UserApiManager.apiManager().login(data);
+        call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
-                    callback.onSuccess(response.body());
+                    callback.onSuccess(call, response.body());
                 }else{
-                    callback.onError(null);
+                    callback.onError(call, null);
                 }
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                callback.onError(t.getMessage());
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                callback.onError(call, t.getMessage());
             }
         });
 
